@@ -1,3 +1,5 @@
+const yargs = require("yargs");
+const { hideBin } = require("yargs/helpers");
 // CommonJS
 // const nodemon = require("nodemon")
 // якщо імпорт з npm пакету, то пишемо назву npm пакету
@@ -65,6 +67,7 @@ const fs = require("fs/promises");
 // fileOperations({ action: "replace", filePath, data: "кодекс Ванги" }); // якщо ми хочемо перезаписати файл, якого немає, то він його створить
 
 const books = require("./work-with-json-files/books");
+const { hide } = require("yargs");
 
 // books.getAll();
 // console.log("__dirname(index)", __dirname);
@@ -107,7 +110,14 @@ const invokeAction = async ({ action, id, title, author }) => {
 //   title: "New title__new",
 //   author: "New author",
 // });
-invokeAction({
-  action: "deleteById",
-  id: "8lZilu0Zndly3CioXx3gV",
-});
+// invokeAction({
+//   action: "deleteById",
+//   id: "8lZilu0Zndly3CioXx3gV",
+// });
+
+const arr = hideBin(process.argv);
+
+const { argv } = yargs(arr);
+invokeAction(argv);
+
+console.log(process.argv);

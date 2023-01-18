@@ -19,7 +19,8 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const books = await getAll();
-  const result = books.find((item) => item.id === id);
+  const bookId = String(id);
+  const result = books.find((item) => item.id === bookId);
   return result || null;
 };
 
@@ -35,22 +36,22 @@ const addBook = async ({ title, author }) => {
 
 const updateById = async (id, data) => {
   const books = await getAll();
-
-  const index = books.findIndex((item) => item.id === id);
+  const bookId = String(id);
+  const index = books.findIndex((item) => item.id === bookId);
 
   if (index === -1) {
     return null;
   }
 
-  books[index] = { id, ...data };
+  books[index] = { bookId, ...data };
   await updateBooks(books);
   return books[index];
 };
 
 const deleteById = async (id) => {
   const books = await getAll();
-
-  const index = books.findIndex((item) => item.id === id);
+  const bookId = String(id);
+  const index = books.findIndex((item) => item.id === bookId);
 
   if (index === -1) {
     return null;
